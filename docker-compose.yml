@@ -1,0 +1,35 @@
+version: '3.7'
+services:
+  backend:
+    build:
+      dockerfile: Dockerfile
+      context: backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    depends_on:
+      - frontend
+    labels:
+      - "traefik.http.routers.backend.rule=Host(`backend.docker.localhost`)"
+  frontend:
+    build:
+      dockerfile: Dockerfile
+      context: frontend
+  reverse-proxy:
+    image: traefik:v2.2
+    command: --api.insecure=true --providers.docker
+    ports:
+      # The HTTP port
+      - "80:80"
+      # The Web UI (enabled by --api.insecure=true)
+      - "8080:8080"
+    volumes:
+      # So that Traefik can listen to the Docker events
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./traefik.toml:/etc/traefik/traefik.toml
+    depends_on:
+      - backend
+      - frontend
+
+

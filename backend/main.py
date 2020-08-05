@@ -6,7 +6,12 @@ app = FastAPI()
 
 @app.get('/')
 def root():
-    return "Hello world"
+    return
+
+
+@app.post('/hello/{name}')
+def say_hello(name):
+    return f"Hello {name}"
 
 
 if __name__ == '__main__':
