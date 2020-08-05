@@ -22,9 +22,11 @@ services:
       - traefik.http.services.${PROJECT_NAME?Variable not set}-frontend.loadbalancer.server.port=3000
     ports:
       - "3000:3000"
-    stdin_open: true
     env_file:
       - .env
+    command: yarn start
+    volumes:
+    - ./frontend/:/app/frontend/
 
   traefik:
     image: traefik:v2.2
