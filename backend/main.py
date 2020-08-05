@@ -1,12 +1,20 @@
+import os
+
 import uvicorn
 from fastapi import FastAPI
 
-app = FastAPI()
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+PROJECT_DIR = os.path.dirname(BASE_DIR)
+
+STATIC_DIR = os.path.join(PROJECT_DIR, 'static')
 
 
-@app.get('/')
-def root():
-    return
+def get_application() -> FastAPI:
+    application = FastAPI()
+    return application
+
+
+app = get_application()
 
 
 @app.post('/hello/{name}')
@@ -15,4 +23,4 @@ def say_hello(name):
 
 
 if __name__ == '__main__':
-    uvicorn.run(app, port=8000, host='0.0.0.0')
+    uvicorn.run('main:app', port=8000, host='0.0.0.0', debug=True, reload=True)

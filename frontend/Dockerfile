@@ -1,8 +1,7 @@
-FROM node:14-stretch
+FROM node:latest
+WORKDIR app
+COPY . /app/
 
-WORKDIR /app
+RUN yarn install
 
-COPY package* /app/
-RUN npm install && npm build dev
-
-
+CMD yarn start
