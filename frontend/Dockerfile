@@ -1,10 +1,7 @@
-FROM funnydmantest/kube:frontend.base
+FROM node:latest
+WORKDIR app
+COPY . /app/
 
-RUN git clone https://github.com/funnydman/kuber.git /kuber/
-
-WORKDIR /kuber/frontend
 RUN yarn install
 
-CMD yarn build
-
-
+CMD yarn start
