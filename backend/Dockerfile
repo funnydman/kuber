@@ -8,4 +8,5 @@ RUN  pip3 install --no-cache-dir pipenv \
 WORKDIR /app
 COPY . /app
 
-CMD python backend/main.py
+
+CMD python main.py

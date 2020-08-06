@@ -17,4 +17,4 @@ spec:
     spec:
       containers:
         - name: fastapi-app
-          image: funnydmantest/kube:latest
+          image: funnydmantest/kube:backend.v3

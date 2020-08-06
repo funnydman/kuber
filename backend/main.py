@@ -15,7 +15,7 @@ main_router = APIRouter()
 DATABASE = {
     'dbname': 'app',
     'user': 'postgres',
-    'host': 'db',
+    'host': os.environ.get('POSTGRES_HOST', 'localhost'),
     'password': 'postgres'
 
 }
